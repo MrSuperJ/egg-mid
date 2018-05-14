@@ -1,6 +1,4 @@
 'use strict';
-
-'use strict';
 module.exports = app => {
     return class getImgController extends app.ApiController {
         index() {

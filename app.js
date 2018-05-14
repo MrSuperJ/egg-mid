@@ -1,14 +1,4 @@
-/**
- *  @index入口 file
- *  ---------------------------------------------
- *  Author : dinglei
- *  Mail   : dl47057@ly.com
- *  Date   : 2017-04-21
- */
-
 'use strict';
-
-// require('apm-agent-nodejs');
 
 const assert = require('assert');
 const crypto = require('crypto');

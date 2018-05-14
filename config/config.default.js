@@ -16,6 +16,17 @@ module.exports = appInfo => {
     config.security = {
         domainWhiteList: ['http://localhost:8081'],
     };
+    config.mongoose = {
+        url: 'mongodb://127.0.0.1/ex',
+        options: {},
+    };
+    // recommended
+    config.mongoose = {
+        client: {
+            url: 'mongodb://127.0.0.1/ex',
+            options: {},
+        },
+    };
     // config.redis = {
     //         clients: {
     //             foo: { // instanceName. See below
