@@ -9,5 +9,5 @@ module.exports = app => {
     router.get('/getImg.html', controller.getImg.index);
     router.get('/getUserInfo.html', controller.user.find);
     router.get('/setUserInfo.html', controller.user.updata);
-
+    router.post("/scanImg.html", controller.uploads.index);
 };

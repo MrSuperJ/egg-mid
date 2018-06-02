@@ -23,17 +23,11 @@ module.exports = app => {
                 app.ErrorType.Exception,
                 code
             );
-            // const data = {
-            //   code,
-            //   message: msg
-            // };
-            // this.ctx.body = data;
-            // // 天网监控
-            // this.ctx.twlogger.warn('fail', {
-            //   subCategory: app.TWLoggerProps.SubCategory.ReqEnd
-            // });
         }
+        log(sign,msg){
+          console.log(`---${sign}--${JSON.stringify(msg)}`)
 
+        }
     }
 
     class CustomService extends app.Service {

@@ -14,6 +14,9 @@ module.exports = appInfo => {
         allowMethods: 'GET,POST'
     }
     config.security = {
+        csrf: false,
+        xssProtection: false,
+        xframe: false,
         domainWhiteList: ['http://localhost:8081'],
     };
     config.mongoose = {
@@ -27,22 +30,6 @@ module.exports = appInfo => {
             options: {},
         },
     };
-    // config.redis = {
-    //         clients: {
-    //             foo: { // instanceName. See below
-    //                 port: 6379, // Redis port
-    //                 host: '127.0.0.1', // Redis host
-    //                 password: 'auth',
-    //                 db: 0,
-    //             },
-    //             bar: {
-    //                 port: 6379,
-    //                 host: '127.0.0.1',
-    //                 password: 'auth',
-    //                 db: 1,
-    //             },
-    //         }
-    //     }
-    // 
+
     return config;
 };

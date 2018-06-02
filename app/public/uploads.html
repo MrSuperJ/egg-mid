@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>图片上传</title>
+  </head>
+  <body>
+    <input type="file" id="file" name="file" accept="image/*"/>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript">
+        var file = $("#file");
+        file.change(e=>{
+          console.log(file[0].files);
+          var form = new FormData();
+          form.append("fileImg",file[0].files[0]);
+          $.ajax({
+                type: "post",
+                url: "http://192.168.1.100:7001/scanImg.html",
+                data: form,
+                contentType: false, // 注意这里应设为false
+                processData: false,    //false
+                cache: false,    //缓存
+                success: function(data){
+                    console.log(data);
+                }
+          })
+        })
+
+    </script>
+  </body>
+</html>
