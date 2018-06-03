@@ -15,7 +15,7 @@
           form.append("fileImg",file[0].files[0]);
           $.ajax({
                 type: "post",
-                url: "http://192.168.1.100:7001/scanImg.html",
+                url: "/scanImg.html",
                 data: form,
                 contentType: false, // 注意这里应设为false
                 processData: false,    //false
