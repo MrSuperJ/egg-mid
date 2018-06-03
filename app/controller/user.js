@@ -3,13 +3,15 @@ module.exports = app => {
         *find() {
         const {ctx} =this,
         reqParams=ctx.query;
+        if(ctx.level>3) return this.fail(500,"权限不足")
         var datas = yield this.ctx.model.User.find(reqParams);
           this.success(datas)
         }
         *updata(){
           const {ctx} =this,
           reqParams=ctx.query;
-          if(!reqParams.userName) return this.success('userName参数不能为空')
+          if(ctx.level>3) return this.fail(500,"权限不足")
+          if(!reqParams.userName) return this.fail(500,'userName参数不能为空')
           var datas = yield this.ctx.model.User.find({userName:reqParams.userName});
           try{
             if(Array.isArray(datas)&&datas[0]._id) {

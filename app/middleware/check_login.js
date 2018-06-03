@@ -21,8 +21,16 @@ module.exports = (options, app) => {
     token=Buffer.from(cookie.token,"base64").toString()
     var findDatas = yield this.model.User.find({_id:token});
     var timestamp=Date.parse(new Date());
-    if(timestamp-findDatas[0].lastLogin.timestamp<10*60*1000&&this.header['user-agent']==findDatas[0].lastLogin.ua) { //10分钟之内不用重复登录
-      this._id=token
+    if(this.header['user-agent']!=findDatas[0].lastLoginUA){ //校验UA
+      return this.body = {
+        code:500,
+        success:false,
+        errMsg:"需要用户重新登录"
+      };
+    }
+    if(timestamp-findDatas[0].timestamp<10*60*1000) { //10分钟之内不用重复登录
+      this._id=token;
+      this.level=findDatas[0].level
     } else {
       return this.body = {
         code:500,

@@ -21,7 +21,7 @@ module.exports = app => {
             }
         }
 
-        fail(code, msg) {
+        fail(code,msg) {
           this.ctx.body = {
             code:code,
             success:false,
