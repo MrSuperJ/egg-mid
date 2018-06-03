@@ -13,19 +13,50 @@ module.exports = app => {
             if (data === null || typeof data === 'undefined') {
                 this.ctx.body = this.ctx.body || '';
             } else {
-                this.ctx.body = data;
+                this.ctx.body = {
+                  code:200,
+                  success:true,
+                  data:data
+                };
             }
         }
 
         fail(code, msg) {
-            app.throwTypeError(
-                msg,
-                app.ErrorType.Exception,
-                code
-            );
+          this.ctx.body = {
+            code:code,
+            success:false,
+            errMsg:msg
+          };
         }
         log(sign,msg){
           console.log(`---${sign}--${JSON.stringify(msg)}`)
+        }
+        getCookie(cookie){
+          var obj={}
+
+          if(!cookie){
+              return obj;
+          };
+          cookie.split('; ').forEach(x=>{
+            if(x.indexOf('&')>-1) {
+              console.log(x.indexOf('&'))
+              var cook={}
+              x.split('&').forEach(y=>{
+                var z=  y.split("=")
+                cook[z[0].trim()]=z[1]
+              })
+              obj[x.slice(0,x.indexOf('='))]
+            } else {
+              var z=  x.split("=")
+              obj[z[0].trim()]=z[1]
+            }
+          })
+          return obj
+        }
+        setToken(userName,ua){
+          var timestamp = Date.parse(new Date());
+          var token= Buffer.from(`un=${userName}&t=${timestamp}&ua=${ua}`);
+          this.ctx.cookies.set('token', token.toString('base64')，{expires:10*60*1000});
 
         }
     }

@@ -5,7 +5,14 @@
     <title>图片上传</title>
   </head>
   <body>
-    <input type="file" id="file" name="file" accept="image/*"/>
+    <div class="login">
+      用户帐号<input type=text name="userName" size="18" value="" ><br>
+      登录密码<input type="password" name="password" size="19" value=""/>
+          <input type=submit name="submit1" value="登陆">
+    </div>
+    <div style="margin:20px 0;">
+      <input type="file" id="file" name="file" accept="image/*"/>
+    </div>
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
     <script type="text/javascript">
         var file = $("#file");
@@ -25,7 +32,26 @@
                 }
           })
         })
+        var submit =$("input[name='submit1']")
+        submit.click(()=>{
+          var userName=$("input[name='userName']").val();
+          var password=$("input[name='password']").val();
+          $.ajax({
+                type: "post",
+                url: "/login.html",
+                data: {
+                  userName,
+                  password
+                },
+                header:{
+                  'content-type':'application/json; charset=UTF-8;'
+                },
+                success: function(data){
+                    console.log(data);
+                }
+          })
 
+        })
     </script>
   </body>
 </html>

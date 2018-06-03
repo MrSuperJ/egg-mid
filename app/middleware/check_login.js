@@ -9,7 +9,8 @@
 
 module.exports = (options, app) => {
   return function*(next) {
-    this.token = this.ctx.header.cookie;
+    this.cookie = this.header.cookie;
+    console.log('cookie',JSON.stringify(this.cookie))
     yield next;
   };
 };

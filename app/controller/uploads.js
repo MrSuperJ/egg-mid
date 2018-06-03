@@ -5,7 +5,6 @@ module.exports = app => {
     return class uploadsController extends app.ApiController {
         *index() {
             const stream = yield this.ctx.getFileStream();
-            this.log('body',this.ctx.header.cookie)
             let buf,resDatas;
             try { // 获取文件流转化base64
                 const parts = yield toArray(stream);
