@@ -5,6 +5,7 @@ module.exports = app => {
     return class uploadsController extends app.ApiController {
         *index() {
             const stream = yield this.ctx.getFileStream();
+            this.log('body',this.ctx.header.cookie)
             let buf,resDatas;
             try { // 获取文件流转化base64
                 const parts = yield toArray(stream);
@@ -16,11 +17,6 @@ module.exports = app => {
             var base64 = buf.toString('base64')
             try {
               resDatas=yield this.ctx.service.bdPhoto.index(base64)
-              // .then(result=>{
-              //         // console.log(JSON.stringify(result));
-              //         this.log('识别结果',result)
-              //         return result
-              // })
             } catch (err) {
                 throw err;
             }
