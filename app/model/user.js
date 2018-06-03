@@ -7,6 +7,7 @@ module.exports = app => {
         password: { type: String },
         mobile:{type:String},
         lastLogin :{type:Object},
+        aliPay:{type:Object}
     });
 
     return mongoose.model('User', UserSchema);

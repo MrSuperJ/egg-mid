@@ -12,7 +12,12 @@ module.exports = app => {
               if(userData.userName!=reqParams.userName ||userData.password!=reqParams.password ){
                 return this.fail(500,"账户或密码不正确")
               } else {
-                var token=this.setToken(reqParams.userName,ua)
+                var token=this.setToken(userData._id)
+                userData.lastLogin={
+                  ua:ua,
+                  timestamp:Date.parse(new Date())
+                }
+                yield this.ctx.model.User.update({_id:userData._id},userData);
                 this.success('登录成功！')
               }
             } else {

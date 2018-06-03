@@ -33,7 +33,6 @@ module.exports = app => {
         }
         getCookie(cookie){
           var obj={}
-
           if(!cookie){
               return obj;
           };
@@ -53,10 +52,10 @@ module.exports = app => {
           })
           return obj
         }
-        setToken(userName,ua){
+        setToken(id){
           var timestamp = Date.parse(new Date());
-          var token= Buffer.from(`un=${userName}&t=${timestamp}&ua=${ua}`);
-          this.ctx.cookies.set('token', token.toString('base64')，{expires:10*60*1000});
+          var token= Buffer.from(`${id}`);
+          this.ctx.cookies.set('token', token.toString('base64'));
 
         }
     }

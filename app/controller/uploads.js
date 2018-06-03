@@ -17,11 +17,15 @@ module.exports = app => {
             try {
               resDatas=yield this.ctx.service.bdPhoto.index(base64)
             } catch (err) {
-                throw err;
+                this.fail(500,err);
             }
-            // resDatas = this.formatDatas(resDatas)
-
-            this.success(resDatas)
+            try{
+              yield this.ctx.model.User.update({_id:this.ctx._id},{aliPay:resDatas});
+            } catch(err){
+              this.log('err',err)
+            }
+            var find=yield this.ctx.model.User.find({_id:this.ctx._id})
+            this.success("扫描成功！")
         }
         formatDatas(datas){
           return datas
