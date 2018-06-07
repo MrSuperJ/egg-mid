@@ -14,48 +14,48 @@ module.exports = app => {
                 this.ctx.body = this.ctx.body || '';
             } else {
                 this.ctx.body = {
-                  code:200,
-                  success:true,
-                  data:data
+                    code: 200,
+                    success: true,
+                    data: data
                 };
             }
         }
 
-        fail(code,msg) {
-          this.ctx.body = {
-            code:code,
-            success:false,
-            errMsg:msg
-          };
+        fail(code, msg) {
+            this.ctx.body = {
+                code: code,
+                success: false,
+                errMsg: msg
+            };
         }
-        log(sign,msg){
-          console.log(`---${sign}--${JSON.stringify(msg)}`)
+        log(sign, msg) {
+            console.log(`---${sign}--${JSON.stringify(msg)}`)
         }
-        getCookie(cookie){
-          var obj={}
-          if(!cookie){
-              return obj;
-          };
-          cookie.split('; ').forEach(x=>{
-            if(x.indexOf('&')>-1) {
-              console.log(x.indexOf('&'))
-              var cook={}
-              x.split('&').forEach(y=>{
-                var z=  y.split("=")
-                cook[z[0].trim()]=z[1]
-              })
-              obj[x.slice(0,x.indexOf('='))]
-            } else {
-              var z=  x.split("=")
-              obj[z[0].trim()]=z[1]
-            }
-          })
-          return obj
+        getCookie(cookie) {
+            var obj = {}
+            if (!cookie) {
+                return obj;
+            };
+            cookie.split('; ').forEach(x => {
+                if (x.indexOf('&') > -1) {
+                    console.log(x.indexOf('&'))
+                    var cook = {}
+                    x.split('&').forEach(y => {
+                        var z = y.split("=")
+                        cook[z[0].trim()] = z[1]
+                    })
+                    obj[x.slice(0, x.indexOf('='))]
+                } else {
+                    var z = x.split("=")
+                    obj[z[0].trim()] = z[1]
+                }
+            })
+            return obj
         }
-        setToken(id){
-          var timestamp = Date.parse(new Date());
-          var token= Buffer.from(`${id}`);
-          this.ctx.cookies.set('token', token.toString('base64'));
+        setToken(id) {
+            var timestamp = Date.parse(new Date());
+            var token = Buffer.from(`${id}`);
+            this.ctx.cookies.set('token', token.toString('base64'));
 
         }
     }
